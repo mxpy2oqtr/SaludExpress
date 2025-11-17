@@ -3,69 +3,52 @@ import { createPatient } from '../services/api';
 
 const PatientForm = ({ onPatientAdded }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [conditions, setConditions] = useState('');
+  const [dob, setDob] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !email) {
-      alert('Nombre y email son requeridos');
+    if (!name || !dob) {
+      alert('Por favor, complete todos los campos.');
       return;
     }
     try {
-      const newPatient = { name, email, conditions };
+      const newPatient = { name, dob };
       const response = await createPatient(newPatient);
-      onPatientAdded(response.data); // Notify parent component
+      onPatientAdded(response.data);
       setName('');
-      setEmail('');
-      setConditions('');
+      setDob('');
     } catch (error) {
-      console.error('Error creating patient:', error);
-      alert('Error al crear el paciente');
+      console.error('Error adding patient:', error);
     }
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="card">
       <h2 className="text-2xl font-bold mb-4 text-gray-700">Registrar Nuevo Paciente</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nombre Completo</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nombre</label>
           <input
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
+            className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Nombre completo"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email</label>
+          <label htmlFor="dob" className="block text-sm font-medium text-gray-600">Fecha de Nacimiento</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
+            type="date"
+            id="dob"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            className="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div>
-          <label htmlFor="conditions" className="block text-sm font-medium text-gray-600">Condiciones Médicas</label>
-          <input
-            type="text"
-            id="conditions"
-            value={conditions}
-            onChange={(e) => setConditions(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-        >
-          Guardar Paciente
+        <button type="submit" className="btn btn-primary w-full">
+          Registrar Paciente
         </button>
       </form>
     </div>
