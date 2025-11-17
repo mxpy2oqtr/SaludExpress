@@ -4,72 +4,151 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#2563eb" />
     <meta
       name="description"
       content="SaludExpress - Plataforma líder en gestión y consulta de resultados médicos. Acceso seguro y rápido a sus análisis clínicos."
     />
+    <meta name="keywords" content="salud, resultados médicos, análisis clínicos, pacientes, doctores, healthcare" />
+    <meta name="author" content="SaludExpress" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="SaludExpress - Gestión de Resultados Médicos" />
+    <meta property="og:description" content="Plataforma segura para gestión y consulta de resultados médicos" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="%PUBLIC_URL%/banner-og.jpg" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SaludExpress - Gestión de Resultados Médicos" />
+    <meta name="twitter:description" content="Plataforma segura para gestión y consulta de resultados médicos" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/banner-twitter.jpg" />
+    
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>SaludExpress - Dashboard Médico</title>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="%PUBLIC_URL%/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalOrganization",
+      "name": "SaludExpress",
+      "description": "Plataforma de gestión y consulta de resultados médicos",
+      "url": "https://saludexpress.com",
+      "logo": "%PUBLIC_URL%/logo.svg",
+      "medicalSpecialty": "Healthcare Technology",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES"
+      }
+    }
+    </script>
+    
+    <title>SaludExpress - Plataforma de Gestión de Resultados Médicos</title>
+    
     <style>
-      body, html {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-          sans-serif;
-        background-color: #f4f7f9;
+      /* Loading Styles */
+      #loading-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        color: #333;
+        z-index: 9999;
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
       }
-      .loading-container {
-        text-align: center;
+      
+      .loading-logo {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 2rem;
+        animation: pulse 2s infinite;
       }
-      .loading-spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border-left-color: #09f;
-        animation: spin 1s ease infinite;
-        margin: 0 auto 20px;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+      
       .loading-text {
-        font-size: 1.2rem;
-        font-weight: 500;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
       }
-      noscript {
-        width: 100%;
-        padding: 20px;
-        background-color: #ffcdd2;
-        color: #c62828;
+      
+      .loading-subtext {
+        font-size: 1rem;
+        opacity: 0.8;
         text-align: center;
+        max-width: 300px;
+      }
+      
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-top: 2rem;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     </style>
   </head>
   <body>
-    <noscript>
-      <strong>JavaScript Requerido</strong>
-      <p>Para acceder a SaludExpress, necesita habilitar JavaScript en su navegador.</p>
-      <p>SaludExpress es una plataforma segura para la gestión y consulta de resultados médicos.</p>
-    </noscript>
-    <div id="root">
-      <div class="loading-container">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Cargando su plataforma médica segura...</p>
+    <!-- Loading Banner -->
+    <div id="loading-banner">
+      <div class="loading-logo">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="55" fill="white"/>
+          <path d="M45 40L75 60L45 80V40Z" fill="#2563eb"/>
+          <circle cx="60" cy="60" r="40" stroke="#2563eb" stroke-width="3"/>
+        </svg>
       </div>
+      <div class="loading-text">SaludExpress</div>
+      <div class="loading-subtext">Cargando su plataforma médica segura...</div>
+      <div class="loading-spinner"></div>
     </div>
+
+    <noscript>
+      <div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
+        <h1 style="color: #dc2626; margin-bottom: 1rem;">JavaScript Requerido</h1>
+        <p style="margin-bottom: 1rem; font-size: 1.1rem;">
+          Para acceder a SaludExpress, necesita habilitar JavaScript en su navegador.
+        </p>
+        <p style="color: #6b7280;">
+          SaludExpress es una plataforma segura para la gestión y consulta de resultados médicos.
+        </p>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script>
+      // Hide loading banner when app is ready
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingBanner = document.getElementById('loading-banner');
+          if (loadingBanner) {
+            loadingBanner.style.opacity = '0';
+            loadingBanner.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => loadingBanner.remove(), 500);
+          }
+        }, 1000);
+      });
+    </script>
   </body>
 </html>
